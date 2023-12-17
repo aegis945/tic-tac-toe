@@ -1,34 +1,35 @@
 #main-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-}
+} 
 
 #gameboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 35vw;
+    height: 35vw;
+    min-height: 30vh;
+    margin-bottom: 50px;
 }
 
 .square {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    float: left;
+    min-width: 0.7em;
+    min-height: 0.7em;
     border: 1px solid black;
-    width: 25%;
-    height: 30%;
     text-align: center;
-    font-size: 80px;
+    font-size: 7em;
+    cursor: pointer;
+    padding: 1vw;
 }
 
 #controls,
 #message {
     text-align: center;
-    margin: 20px 0;
-
+    margin: 1em;
 }

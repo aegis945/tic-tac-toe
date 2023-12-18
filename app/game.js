@@ -7,12 +7,12 @@ const Game = (() => {
     let gameOver;
 
     const start = () => {
-        players = [
-            Player(document.querySelector("#player1").value, "X"),
-            Player(document.querySelector("#player2").value, "O")
-        ]
+        const playerOne = Player(document.querySelector("#player1").value, "X");
+        const playerTwo = Player(document.querySelector("#player2").value, "O");
+
+        players = [playerOne, playerTwo]
         currentPlayerIndex = 0;
-        gameOver = false;
+        gameOver = false;    
         Gameboard.renderGameboard();
     }
 
@@ -24,16 +24,28 @@ const Game = (() => {
         }
     }
 
+    const restart = () => {
+        for(let i = 0; i < Gameboard.getGameboardLength(); i++ ) {
+            Gameboard.update(i, "");
+        }
+    }
+
     return {
         start,
+        restart,
         handleSquareClick
     }
 
 })();
 
-const startButton = document.querySelector('#start-button');
-startButton.addEventListener('click', () => {
+const startButton = document.querySelector("#start-button");
+startButton.addEventListener("click", () => {
     Game.start();
+})
+
+const restartButton = document.querySelector("#restart-button");
+restartButton.addEventListener("click", () => {
+    Game.restart();
 })
 
 export default Game;

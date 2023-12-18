@@ -20,9 +20,14 @@ const Gameboard = (() => {
         renderGameboard();
     }
 
+    const getGameboardLength = () => {
+        return gameboard.length;
+    }
+
     return {
         renderGameboard,
-        update
+        update,
+        getGameboardLength
     }
 })();
 

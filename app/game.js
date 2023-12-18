@@ -18,8 +18,10 @@ const Game = (() => {
 
     const handleSquareClick = (event) => {
         let squareIndex = parseInt(event.target.id.split("-")[1]);
-        Gameboard.update(squareIndex, players[currentPlayerIndex].mark);
-        currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+        if(event.target.innerHTML === ""){
+            Gameboard.update(squareIndex, players[currentPlayerIndex].mark);
+            currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+        }
     }
 
     return {

@@ -7,6 +7,8 @@ const Game = (() => {
     let gameOver;
 
     const start = () => {
+        if(gameOver) 
+            return;
         const playerOne = Player(document.querySelector("#player1").value, "X");
         const playerTwo = Player(document.querySelector("#player2").value, "O");
     
@@ -19,15 +21,24 @@ const Game = (() => {
     }
 
     const handleSquareClick = (event) => {
+        if(gameOver) 
+            return;
         let squareIndex = parseInt(event.target.id.split("-")[1]);
         if(event.target.innerHTML === ""){
             Gameboard.update(squareIndex, players[currentPlayerIndex].mark);
-            currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+            if(Gameboard.checkForWin(Gameboard.getGameboard(), players[currentPlayerIndex].mark)) {
+                gameOver = true;
+                alert(`${players[currentPlayerIndex].name} won!`);
+            } else if(Gameboard.checkForTie(Gameboard.getGameboard())){
+                gameOver = true;
+                alert("It's a tie!")
+            }
+        currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
         }
     }
 
     const restart = () => {
-        for(let i = 0; i < Gameboard.getGameboardLength(); i++ ) {
+        for(let i = 0; i < Gameboard.getGameboard().length; i++ ) {
             Gameboard.update(i, "");
         }
         currentPlayerIndex = 0;

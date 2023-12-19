@@ -9,11 +9,13 @@ const Game = (() => {
     const start = () => {
         const playerOne = Player(document.querySelector("#player1").value, "X");
         const playerTwo = Player(document.querySelector("#player2").value, "O");
-
-        players = [playerOne, playerTwo]
-        currentPlayerIndex = 0;
-        gameOver = false;    
-        Gameboard.renderGameboard();
+    
+        if(playerOne !== null && playerTwo !== null){
+            players = [playerOne, playerTwo]
+            currentPlayerIndex = 0;
+            gameOver = false;
+            Gameboard.renderGameboard();
+        }
     }
 
     const handleSquareClick = (event) => {
@@ -28,6 +30,8 @@ const Game = (() => {
         for(let i = 0; i < Gameboard.getGameboardLength(); i++ ) {
             Gameboard.update(i, "");
         }
+        currentPlayerIndex = 0;
+        gameOver = false;
     }
 
     return {

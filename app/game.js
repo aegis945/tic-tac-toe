@@ -1,5 +1,6 @@
 import Player from './player.js';
 import Gameboard from './gameboard.js';
+import DisplayController from './displayController.js';
 
 const Game = (() => {
     let players = [];
@@ -9,8 +10,8 @@ const Game = (() => {
     const start = () => {
         if(gameOver) 
             return;
-        const playerOne = Player(document.querySelector("#player1").value, "X");
-        const playerTwo = Player(document.querySelector("#player2").value, "O");
+        const playerOne = Player(document.querySelector("#player1").value, "X", 0);
+        const playerTwo = Player(document.querySelector("#player2").value, "O", 1);
     
         if(playerOne !== null && playerTwo !== null){
             players = [playerOne, playerTwo]
@@ -28,10 +29,10 @@ const Game = (() => {
             Gameboard.update(squareIndex, players[currentPlayerIndex].mark);
             if(Gameboard.checkForWin(Gameboard.getGameboard(), players[currentPlayerIndex].mark)) {
                 gameOver = true;
-                alert(`${players[currentPlayerIndex].name} won!`);
+                DisplayController.renderMessage(`${players[currentPlayerIndex].name} won!`);
             } else if(Gameboard.checkForTie(Gameboard.getGameboard())){
                 gameOver = true;
-                alert("It's a tie!")
+                DisplayController.renderMessage("It's a tie!");
             }
         currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
         }
@@ -41,6 +42,7 @@ const Game = (() => {
         for(let i = 0; i < Gameboard.getGameboard().length; i++ ) {
             Gameboard.update(i, "");
         }
+        DisplayController.renderMessage("");
         currentPlayerIndex = 0;
         gameOver = false;
     }
